@@ -86,7 +86,8 @@
                      <div class="container">
                         <div class="row">
                            <div class="col-md-6">
-                              <img src="https://unsplash.imgix.net/photo-1423439793616-f2aa4356b37e?w=1024&amp;q=50&amp;fm=jpg&amp;s=3b42f9c018b2712544debf4d6a4998ff" class="img-circle img-responsive" id="profilePic">
+                              <img src="<?php if ($row["pic"] == '') { echo "http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png";
+                            } else { echo $row["pic"]; }?>" class="img-circle img-responsive" id="profilePic">
                            </div>
                            <div class="col-md-6">
                               <h1 id="nameLabel">Name: <?php echo $row["firstName"]." ".$row["lastName"]; ?></h1>
@@ -108,6 +109,41 @@
 
                               ?> 
                               </ul>
+
+					            <form class="form-horizontal" role="form" action="addSkill.php" method="post">
+					              <div class="form-group">
+					                <div class="col-sm-3">
+					                  <label class="control-label">New Skills</label>
+					                </div>
+					                <div class="col-sm-8">
+					                  <select name="newSkill" class="form-control">
+
+					                  	<?php
+
+					                  		// Create connection
+											$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+											// Check connection
+											if ($conn->connect_error) {
+												//header("Location: profile.php");
+												$error = "Connection failed: " . $conn->connect_error;
+											} else {
+
+												$sql = "SELECT * FROM skills";
+												$skillList = $conn->query($sql);
+												//echo "Error updating record: " . $conn->error;
+												while ($skill = $skillList->fetch_assoc()) {
+													echo '<option value="'.$skill["ID"].'">'.$skill["skillName"].'</option>';
+												}
+											}
+
+					                  	?>
+					                  </select>
+					                </div>
+					                <div class="col-sm-1">
+					                  <button type="submit" class="btn btn-warning">+</button>
+					                </div>
+					              </div>
+					            </form>
                            </div>
                         </div>
                      </div>
@@ -136,16 +172,19 @@
                   <h4 class="modal-title">Customize profile</h4>
                </div>
                <div class="modal-body">
-                  <form role="form">
-                     <div class="form-group" id="pictureURL"><label class="control-label" for="exampleInputEmail1"></label><input class="form-control" id="exampleInputEmail1" placeholder="Picture URL" type="text"></div>
-                     <div class="form-group" id="userDescription"><label class="control-label" for="exampleInputEmail1"></label><input class="form-control" id="exampleInputEmail1" placeholder="Enter short description" type="text"></div>
-                     <div class="form-group" id="companyName"><label class="control-label" for="exampleInputEmail1"></label><input class="form-control" id="exampleInputEmail1" placeholder="Enter company name" type="text"></div>
-                     <div class="form-group" id="websitePage"><label class="control-label" for="exampleInputEmail1"></label><input class="form-control" id="exampleInputEmail1" type="text" placeholder="Enter website"></div>
-                     <div class="form-group" id="fbPage"><label class="control-label" for="exampleInputEmail1"></label><input class="form-control" id="exampleInputEmail1" placeholder="Enter facebook page" type="text"></div>
-                     <div class="form-group" id="linkedinPage"><label class="control-label" for="exampleInputEmail1"></label><input class="form-control" id="exampleInputEmail1" placeholder="Enter LinkedIn page" type="text"></div>
-                  </form>
+                  <form role="form" action="updateProfile.php" method="post">
+                  	 <div class="form-group" id="pictureURL"><label class="control-label" for="exampleInputEmail1"></label><input class="form-control" id="fname" placeholder="First Name" name="fname" type="text" value=<?php echo '"'.$row['firstName'].'"'; ?>></div>
+                     <div class="form-group" id="userDescription"><label class="control-label" for="exampleInputEmail1"></label><input class="form-control" id="lname" name="lname" placeholder="Last Name" type="text" value=<?php echo '"'.$row['lastName'].'"'; ?>></div>
+                     <div class="form-group" id="pictureURL"><label class="control-label" for="exampleInputEmail1"></label><input class="form-control" id="pic" placeholder="Picture URL" name="pic" type="text" value=<?php echo '"'.$row['pic'].'"'; ?>></div>
+                     <div class="form-group" id="userDescription"><label class="control-label" for="exampleInputEmail1"></label><input class="form-control" id="bio" name="bio" placeholder="Enter short description" type="text" value=<?php echo '"'.$row['bio'].'"'; ?>></div>
+                     <div class="form-group" id="companyName"><label class="control-label" for="exampleInputEmail1"></label><input class="form-control" id="cproject" name="cproject" placeholder="Enter company/project name" type="text" value=<?php echo '"'.$row['cproject'].'"'; ?>></div>
+                     <div class="form-group" id="websitePage"><label class="control-label" for="exampleInputEmail1"></label><input class="form-control" id="website" name="website" type="text" placeholder="Enter website" value=<?php echo '"'.$row['website'].'"'; ?>></div>
+                     <div class="form-group" id="fbPage"><label class="control-label" for="exampleInputEmail1"></label><input class="form-control" id="facebook" name="facebook" placeholder="Enter facebook page" type="text" value=<?php echo '"'.$row['facebook'].'"'; ?>></div>
+                     <div class="form-group" id="linkedinPage"><label class="control-label" for="exampleInputEmail1"></label><input class="form-control" id="linkedin" name="linkedin" placeholder="Enter LinkedIn page" type="text" value=<?php echo '"'.$row['linkedin'].'"'; ?>></div>
+                  
                </div>
-               <div class="modal-footer"><a class="btn btn-default" data-dismiss="modal">Close</a><a class="btn btn-primary">Save changes</a></div>
+               <div class="modal-footer"><a class="btn btn-default" data-dismiss="modal">Close</a><button name="submit" type="submit" class="btn btn-default">Apply Changes</button></div>
+               </form>
             </div>
          </div>
       </div>
@@ -168,17 +207,14 @@
 
                   	 	$sql = "SELECT MAX(xp) AS HighestXP FROM profile";
                   	 	$result = $conn->query($sql);
-                  	 	$row = $result->fetch_assoc();
+                  	 	$xprow = $result->fetch_assoc();
 
-                  	 	$maxXP = $row["HighestXP"];
+                  	 	$maxXP = $xprow["HighestXP"];
                   	 	$conn->close();
 
-                  	 	echo '<div class="progress-bar" role="progressbar" style="width: '. ($myXP/$maxXP * 100).'%;">'.$myXP. ' XP</div>';
-
-
+                  	 	echo '<div class="progress-bar" role="progressbar" style="width: '. (($myXP/$maxXP) * 100).'%;">'.$myXP. ' XP</div>';
 
                   	 ?>
-                     <div class="progress-bar" role="progressbar" style="width: 60%;">60% Complete</div>
                   </div>
                </div>
             </div>
