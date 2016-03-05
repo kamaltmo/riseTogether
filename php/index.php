@@ -3,7 +3,6 @@
    include 'database_info.php';
    session_start(); // Start Session
 
-include('login.php'); // Includes Login Script
 include('signup.php'); // Includes Login Script
 
    if(isset($_SESSION['login_user'])){
@@ -23,11 +22,12 @@ include('signup.php'); // Includes Login Script
     </head><body>
 
 <div class="cover">
+<p id="demo"></p>
    <div class="navbar navbar-default">
       <div class="container">
          <div class="navbar-header"> <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#"><span>Logo</span></a> </div>
          <div class="collapse navbar-collapse" id="navbar-ex-collapse">
-            <a class="btn btn-default navbar-btn navbar-right" data-toggle="modal" data-target="#SignIn">Sign In</a>
+            <a onclick="getLocation()" class="btn btn-default navbar-btn navbar-right" data-toggle="modal" data-target="#SignIn">Sign In</a>
             <ul class="nav navbar-nav navbar-right">
                <li class="active"> <a href="#">About</a> </li>
                <li> <a href="#">Contact</a> </li>
@@ -63,13 +63,9 @@ include('signup.php'); // Includes Login Script
                   <div class="col-sm-2"><label for="inputPassword3" class="control-label">Password</label></div>
                   <div class="col-sm-10"><input type="password" class="form-control" id="password" name="password" placeholder="Password"></div>
                </div>
-               <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-10">
-                     <div class="checkbox"><label><input type="checkbox" id="skill" name="skill"> Remember me </label></div>
-                  </div>
-               </div>
+               <input id="onsiteCheck" name="onsiteCheck" type="hidden" name="onsite" value="0">
          </div>
-         <div class="modal-footer"><button name="submitLogin" type="submit" class="btn btn-default">Sign in</button></div>
+         <div class="modal-footer"><button id="ss" type="submit" class="btn btn-default">Sign in</button></div>
          </form>
       </div>
    </div>
@@ -82,7 +78,7 @@ include('signup.php'); // Includes Login Script
             <h4 class="modal-title">Sign Up</h4>
          </div>
          <div class="modal-body">
-            <form class="form-horizontal text-center" role="form" action="" method="post">
+            <form class="form-horizontal text-center" role="form" action="login.php" method="post">
                <div class="form-group">
                   <div class="col-sm-2"><label for="email" class="control-label">Email</label></div>
                   <div class="col-sm-10"><input type="email" class="form-control" id="email" name="email" placeholder="Email"></div>
@@ -106,4 +102,45 @@ include('signup.php'); // Includes Login Script
       </div>
    </div>
 </div>
-</body></html>
+</body>
+   <script type="text/javascript">
+      
+      var x = document.getElementById("demo");
+   function getLocation() {
+       if (navigator.geolocation) {
+           navigator.geolocation.getCurrentPosition(checkPosition);
+       } 
+   }
+   function checkPosition(position) {
+       x.innerHTML = "Latitude: " + position.coords.latitude + 
+       "<br>Longitude: " + position.coords.longitude; 
+
+       //Check user is in rise
+       if (( -2.2512 > position.coords.longitude) && (position.coords.longitude > -2.2532)) {
+         if (( 54.4672 > position.coords.latitude) && (position.coords.latitude > 53.4661)) {
+               document.getElementById("onsiteCheck").value = 1;
+            }
+         }
+
+      //Check user is in MMU
+       if (( -2.2388 > position.coords.longitude) && (position.coords.longitude > -2.2419)) {
+         if (( 54.4715 > position.coords.latitude) && (position.coords.latitude > 53.4695)) {
+               document.getElementById("onsiteCheck").value = 1;
+            }
+         } 
+
+   }
+
+   $("document").ready(function(){ 
+
+      $("#ss").click(function() {
+         var email = document.getElementById("email").value;
+         var pass = document.getElementById("password").value;
+         var onsiteCheck = document.getElementById("onsiteCheck").value;
+         $.post( "login.php", { email: ""+email+"", password: ""+pass+"", onsiteCheck:''+onsiteCheck+'' } );
+      });
+
+   });
+
+   </script>
+</html>
