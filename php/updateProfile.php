@@ -21,7 +21,7 @@
 			$error = "Connection failed: " . $conn->connect_error;
 		} else {
 
-			$sql = "UPDATE profile SET firstName='$fname',lastName='$lname',pic='$pic',website='$website',cproject='$cproject',bio='$bio',facebook='$facebook',linkedin='$linkedin' WHERE email = 'g@g.com'";
+			$sql = "UPDATE profile SET firstName='$fname',lastName='$lname',pic='$pic',website='$website',cproject='$cproject',bio='$bio',facebook='$facebook',linkedin='$linkedin' WHERE email = '".$_SESSION['login_user']."'";
 			$conn->query($sql);
 			//echo "Error updating record: " . $conn->error;
 			$conn->close();

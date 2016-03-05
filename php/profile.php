@@ -71,7 +71,7 @@
                      <a href="#">Contact</a>
                   </li>
                   <li>
-                     <a href="#">LogOut</a>
+                     <a href="logout.php">Log Out</a>
                   </li>
                </ul>
                <ul class="nav navbar-nav navbar-right"></ul>
@@ -258,4 +258,5 @@
          </div>
       </footer>
    </body>
+
 </html>
