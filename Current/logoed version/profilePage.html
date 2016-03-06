@@ -1,0 +1,370 @@
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="C:\Users\User\Desktop\startbootstrap-agency-1.0.6\css\bootstrap.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <style>
+      input[type=checkbox] {
+                visibility: hidden;
+              }
+              .checkboxOne {
+                width: 120px;
+                height: 40px;
+                background: rgba(51,51,51, .6);
+                margin: 20px 315px;
+            
+                border-radius: 50px;
+                position: relative;
+              }
+              .checkboxOne:before {
+                content: 'XBOX';
+                position: absolute;
+                top: 10px;
+                left: 14px;
+                height: 2px;
+                color: #26ca28;
+                font-size: 16px;
+              }
+            
+              .checkboxOne:after {
+                content: 'PC';
+                position: absolute;
+                top: 10px;
+                left: 84px;
+                height: 2px;
+                color: #47DCDC;
+                font-size: 16px;
+              }
+            
+              .checkboxOne label {
+                display: block;
+                width: 52px;
+                height: 22px;
+                border-radius: 80px;
+            
+                transition: all .5s ease;
+                cursor: pointer;
+                position: absolute;
+                top: 9px;
+                z-index: 1;
+                left: 12px;
+                background: #47DCDC;
+              }
+            
+                  .checkboxTwo {
+                  width: 120px;
+                  height: 40px;
+                  background: rgba(51,51,51, .6);
+                  margin: 20px 170px;
+              
+                  border-radius: 50px;
+                  position: relative;
+                }
+                .checkboxTwo:before {
+                  content: 'XBOX';
+                  position: absolute;
+                  top: 10px;
+                  left: 14px;
+                  height: 2px;
+                  color: #26ca28;
+                  font-size: 16px;
+                }
+              
+                .checkboxTwo:after {
+                  content: 'PC';
+                  position: absolute;
+                  top: 10px;
+                  left: 84px;
+                  height: 2px;
+                  color: #47DCDC;
+                  font-size: 16px;
+                }
+              
+                .checkboxTwo label {
+                  display: block;
+                  width: 52px;
+                  height: 22px;
+                  border-radius: 80px;
+              
+                  transition: all .5s ease;
+                  cursor: pointer;
+                  position: absolute;
+                  top: 9px;
+                  z-index: 1;
+                  left: 12px;
+                  background: #47DCDC;
+                }
+              
+              /**
+               * Create the checkbox event for the label
+               */
+               .checkboxTwo input[type=checkbox]:checked + label {
+                left: 60px;
+                background: #26ca28;
+              }
+            
+            /**
+             * Create the checkbox event for the label
+             */
+             .checkboxOne input[type=checkbox]:checked + label {
+              left: 60px;
+              background: #26ca28;
+            }
+            
+              @media (max-width: 1200px) {
+              .checkboxOne {
+                                      margin: 10px 24px;
+                                  
+                      }
+              }
+              @media (max-width: 992px) {
+              .checkboxOne {
+                                      margin: 20px 171px;
+                                  
+                      }
+              }
+              @media (max-width: 767px) {
+              .checkboxOne {
+                                      margin: 20px 160px;
+                                  
+                      }
+              }
+    </style>
+  </head><body>
+    <div class="navbar navbar-default navbar-inverse navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><span>Logo</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+          <a class="btn btn-default navbar-right">Sign Out</a>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active">
+              <a href="#">Home</a>
+            </li>
+            <li class="active">
+              <a href="#">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-6">
+                    <img src="https://unsplash.imgix.net/photo-1423439793616-f2aa4356b37e?w=1024&amp;q=50&amp;fm=jpg&amp;s=3b42f9c018b2712544debf4d6a4998ff" class="img-circle img-responsive" id="profilePic">
+                    <p>
+                      <br>
+                      <br>
+                    </p>
+                    <h1 class="text-center text-primary">Donald Drumpf</h1>
+                    <h3 contenteditable="true" class="text-center">Web Developer</h3>
+                    <div class="row">
+                      <div></div>
+                      <div class="col-sm-offset-3 col-sm-6 col-sm-offset-3">
+                        <a class="btn btn-block btn-primary btn-sm">Contact Me</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <h1 class="text-primary">Bio</h1>
+                    <div class="well">
+                      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus
+                        ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo
+                        sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed
+                        odio dui.
+                        <br>
+                        <br>Website:</p>
+                    </div>
+                    <br>
+                    <h3 contenteditable="true">Other Skillsz</h3>
+                    <ul class="list-group text-left" id="otherSkills">
+                      <li class="list-group-item list-group-item-danger">Cras justo odio</li>
+                      <li class="list-group-item list-group-item-danger">Dapibus ac facilisis in</li>
+                      <li class="list-group-item list-group-item-danger">Morbi leo risus</li>
+                      <li class="list-group-item list-group-item-danger">Porta ac consectetur ac</li>
+                      <li class="list-group-item list-group-item-danger">Vestibulum at eros</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="section section-primary">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 text-left">
+            
+            <div class="row">
+              <div class="col-md-12 hidden-lg hidden-md hidden-sm text-left">
+                <a href="#"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
+                <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
+                <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
+                <a href="#"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-8 col-sm-offset-1">
+                <div class="col-md-12 hidden-xs text-right">
+                  <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
+                  <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
+                  <a href="#"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <div class="modal fade" id="customizeProfile">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title text-primary">Customize profile</h4>
+          </div>
+          <div class="modal-body">
+            <form role="form">
+              <div class="form-group" id="pictureURL">
+                <label class="control-label" for="exampleInputEmail1"></label>
+                <input class="form-control" id="exampleInputEmail1" placeholder="Picture URL" type="text">
+              </div>
+              <div class="form-group" id="userDescription">
+                <label class="control-label" for="exampleInputEmail1"></label>
+                <input class="form-control" id="exampleInputEmail1" placeholder="Enter short description" type="text">
+              </div>
+              <div class="form-group" id="companyName">
+                <label class="control-label" for="exampleInputEmail1"></label>
+                <input class="form-control" id="exampleInputEmail1" placeholder="Enter company name" type="text">
+              </div>
+              <div class="form-group" id="websitePage">
+                <label class="control-label" for="exampleInputEmail1"></label>
+                <input class="form-control" id="exampleInputEmail1" type="text" placeholder="Enter website">
+              </div>
+              <div class="form-group" id="fbPage">
+                <label class="control-label" for="exampleInputEmail1"></label>
+                <input class="form-control" id="exampleInputEmail1" placeholder="Enter facebook page" type="text">
+              </div>
+              <div class="form-group" id="linkedinPage">
+                <label class="control-label" for="exampleInputEmail1"></label>
+                <input class="form-control" id="exampleInputEmail1" placeholder="Enter LinkedIn page" type="text">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <a class="btn btn-default" data-dismiss="modal">Close</a>
+            <a class="btn btn-primary">Save changes</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <p>
+              <br>
+              <br>
+              <br>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <p>User experience points</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="progress" id="progressBar">
+              <div class="progress-bar" role="progressbar" style="width: 60%;">60% Complete</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-2">
+            <a class="btn btn-block btn-md btn-primary" contenteditable="true" id="browsePeople">Browse People</a>
+          </div>
+          <div class="col-md-2 text-center">
+            <a class="btn btn-block btn-md btn-primary" id="viewConnections">View connections</a>
+          </div>
+          <div class="col-md-2">
+            <a class="btn btn-block btn-md btn-primary" id="viewProjects">View my projects</a>
+          </div>
+          <div class="col-md-2">
+            <a class="btn btn-block btn-md btn-primary" id="customizeProfile" data-toggle="modal" data-target="#customizeProfile">Customize Profile</a>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+      </div>
+    </div>
+    <footer class="section section-primary">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <p>
+              <br>
+              <br>
+              <br>
+            </p>
+            <h1 class="text-center">Footer header</h1>
+          </div>
+          <div class="col-sm-6">
+            <div class="row">
+              <div class="col-md-12 hidden-lg hidden-md hidden-sm text-center">
+                <a href="#"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
+                <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
+                <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
+                <a href="#"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
+              </div>
+            </div>
+            <p>
+              <br>
+              <br>
+              <br>
+            </p>
+            <div class="row">
+              <div class="col-md-12 hidden-xs text-right">
+                <a href="#"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
+                <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
+                <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
+                <a href="#"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  
+
+</body></html>
