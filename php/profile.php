@@ -3,6 +3,13 @@
    include 'database_info.php';
 	session_start();
 
+   $id = $_SESSION['userID'];
+
+   if (isset($_GET['id']) && !($_GET['id'] == $_SESSION['userID'])) {
+      $id = $_GET['id'];
+   }
+
+
 	if(!isset($_SESSION['login_user']))
     //Redirect if not logged in
         header("location: index.php");
@@ -14,7 +21,7 @@
 			header("Location: index.php");
 			echo $error = "Connection failed: " . $conn->connect_error;
 		} else {
-			$sql = "SELECT * FROM profile WHERE email = '".$_SESSION['login_user']."'";
+			$sql = "SELECT * FROM profile WHERE ID = '".$id."'";
 			$result = $conn->query($sql);
             
 	            if ($result->num_rows == 1) {
@@ -112,13 +119,18 @@
 
 					            <form class="form-horizontal" role="form" action="addSkill.php" method="post">
 					              <div class="form-group">
+                             <?php
+
+                              if ($id == $_SESSION['userID']) {
+                                 echo '
 					                <div class="col-sm-3">
 					                  <label class="control-label">New Skills</label>
 					                </div>
 					                <div class="col-sm-8">
-					                  <select name="newSkill" class="form-control">
 
-					                  	<?php
+                                 <select name="newSkill" class="form-control">';
+
+					                  
 
 					                  		// Create connection
 											$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
@@ -136,12 +148,14 @@
 												}
 											}
 
-					                  	?>
-					                  </select>
+					                  	
+					                   echo '</select>
+                                 
 					                </div>
 					                <div class="col-sm-1">
 					                  <button type="submit" class="btn btn-warning">+</button>
-					                </div>
+					                </div>';
+                                } ?>
 					              </div>
 					            </form>
                            </div>
@@ -223,18 +237,30 @@
       <div class="section">
          <div class="container">
             <div class="row">
-               <div class="col-md-3">
+               <?php 
+
+                  if($id != $_SESSION['userID']) {
+                     echo '<div class="col-md-3">
+                     <a class="btn btn-block btn-lg btn-primary" id="contactUser">Contact User</a>
+                     </div><div class="col-md-3">
+                     <a class="btn btn-block btn-lg btn-primary" id="requestProject">Make A Request</a>
+                     </div>';
+                  } else {
+                     echo '<div class="col-md-3">
                   <a class="btn btn-block btn-lg btn-primary" contenteditable="true" id="browsePeople">Browse People</a>
                </div>
                <div class="col-md-3">
                   <a class="btn btn-block btn-lg btn-primary" id="viewConnections">View connections</a>
                </div>
                <div class="col-md-3">
-                  <a class="btn btn-block btn-lg btn-primary" id="viewProjects">View my projects</a><a class="btn btn-block btn-lg btn-primary" id="viewUsersProjects">View user's projects</a>
+                  <a class="btn btn-block btn-lg btn-primary" id="viewProjects">View my projects</a>
                </div>
                <div class="col-md-3">
-                  <a class="btn btn-block btn-lg btn-primary" id="customizeProfile" data-toggle="modal" data-target="#customizeProfile">Customize Profile</a><a class="btn btn-block btn-lg btn-primary" id="contactUser">Contact User</a>
-               </div>
+                  <a class="btn btn-block btn-lg btn-primary" id="customizeProfile" data-toggle="modal" data-target="#customizeProfile">Customize Profile</a>
+               </div>';
+                  }
+
+               ?>
             </div>
          </div>
       </div>

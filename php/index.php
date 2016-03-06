@@ -112,8 +112,8 @@ include('signup.php'); // Includes Login Script
        } 
    }
    function checkPosition(position) {
-       x.innerHTML = "Latitude: " + position.coords.latitude + 
-       "<br>Longitude: " + position.coords.longitude; 
+       //x.innerHTML = "Latitude: " + position.coords.latitude + 
+       //"<br>Longitude: " + position.coords.longitude; 
 
        //Check user is in rise
        if (( -2.2512 > position.coords.longitude) && (position.coords.longitude > -2.2532)) {

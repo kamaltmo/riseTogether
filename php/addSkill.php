@@ -14,7 +14,7 @@
 		$error = "Connection failed: " . $conn->connect_error;
 	} else {
 
-		$sql = "SELECT * FROM profileskills WHERE profileID = $userID AND skillID = $skillID";
+		$sql = "SELECT * FROM profileskills WHERE profileID = $userID AND skillsID = $skillID";
 		$result = $conn->query($sql);
 
 		if ($result->num_rows >= 1) {
